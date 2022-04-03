@@ -7,7 +7,7 @@ import android.widget.TextView;
 
 public class DetailActivity extends AppCompatActivity {
     TextView mNameEvent, mDateEvent, mDetailEvent;
-    String sNameEvent, sDateEvent;
+    String sNameEvent, sDateEvent, sDetailEvent;
     private static final String TAG = "DetailActivity";
     
     @Override
@@ -16,7 +16,7 @@ public class DetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_detail);
         mNameEvent = (TextView) findViewById(R.id.nameEvent);
         mDateEvent = (TextView) findViewById(R.id.dateEvent);
-//        mDetailEvent = (TextView) findViewById(R.id.nameEvent);
+        mDetailEvent = (TextView) findViewById(R.id.detailEvent);
 
         getItemIntent();
         setItemIntent();
@@ -28,12 +28,13 @@ public class DetailActivity extends AppCompatActivity {
         if(getIntent().hasExtra("nameEvent") && getIntent().hasExtra("dateEvent")){
              sNameEvent = getIntent().getStringExtra("nameEvent");
              sDateEvent = getIntent().getStringExtra("dateEvent");
+             sDetailEvent = getIntent().getStringExtra("detailEvent");
 
         }
     }
     private void setItemIntent(){
         mNameEvent.setText(sNameEvent);
         mDateEvent.setText(sDateEvent);
-//        mDetailEvent.setText(sDetailEvent);
+        mDetailEvent.setText(sDetailEvent);
     }
 }
