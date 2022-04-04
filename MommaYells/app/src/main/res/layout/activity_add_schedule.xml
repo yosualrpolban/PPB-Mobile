@@ -153,5 +153,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/addKeteranganEvent" />
 
+    <ImageView
+        android:id="@+id/buttonDate"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginStart="316dp"
+        android:layout_marginEnd="18dp"
+        app:layout_constraintBottom_toTopOf="@+id/addKeteranganEvent"
+        app:layout_constraintEnd_toEndOf="@+id/addDateEvent"
+        app:layout_constraintStart_toStartOf="@+id/addDateEvent"
+        app:layout_constraintTop_toBottomOf="@+id/addNameEvent"
+        app:srcCompat="@drawable/event_asset" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

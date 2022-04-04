@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -22,6 +23,7 @@ public class AddSchedule extends AppCompatActivity {
     private AppCompatButton mImageButton, mButtonCancel;
     private EditText mAddNameSchedule, mAddDateSchedule, mAddKeteranganSchedule;
     final Calendar calendar = Calendar.getInstance();
+    private ImageView mButtonDate;
     private boolean isFragmentDisplayed = false;
     static final String STATE_FRAGMENT = "state_of_fragment";
 
@@ -37,6 +39,8 @@ public class AddSchedule extends AppCompatActivity {
         mAddKeteranganSchedule = (EditText) findViewById(R.id.addKeteranganEvent);
         mImageButton = (AppCompatButton) findViewById(R.id.ButtonWhats);
         final Button mButtonAdd = (Button) findViewById(R.id.buttonSubmit);
+        mButtonDate = (ImageView) findViewById(R.id.buttonDate);
+
 
         mImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,7 +71,7 @@ public class AddSchedule extends AppCompatActivity {
                 updateLabel();
             }
         };
-        mAddDateSchedule.setOnClickListener(new View.OnClickListener() {
+        mButtonDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 new DatePickerDialog(AddSchedule.this, date, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH),
