@@ -76,6 +76,26 @@
         app:layout_constraintTop_toBottomOf="@+id/titleDate" />
 
     <TextView
+        android:id="@+id/titleTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="26dp"
+        android:layout_marginTop="15dp"
+        android:text="Time of Event"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dateEvent" />
+
+    <TextView
+        android:id="@+id/timeEvent"
+        android:layout_width="355dp"
+        android:layout_height="18dp"
+        android:layout_marginLeft="27dp"
+        android:layout_marginTop="7dp"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/titleTime" />
+
+    <TextView
         android:id="@+id/titleKeterangan"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
@@ -83,7 +103,7 @@
         android:layout_marginTop="14dp"
         android:text="Detail of Event"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dateEvent" />
+        app:layout_constraintTop_toBottomOf="@+id/timeEvent" />
 
     <TextView
         android:id="@+id/detailEvent"
@@ -95,8 +115,10 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/titleKeterangan" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/deleteButton"
+        android:background="@color/purple_700"
+        android:textColor="@color/white"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="29dp"

@@ -22,4 +22,8 @@ public class ScheduleViewModel extends AndroidViewModel {
     LiveData<List<Schedule>> getAllSchedule() { return mAllSchedule; }
 
     public void insert(Schedule tugas) { mRepositorySchedule.insert(tugas); }
+
+    public void deleteOne(String nameSchedule){
+        mRepositorySchedule.deleteOne(nameSchedule);
+    }
 }

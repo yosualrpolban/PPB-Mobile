@@ -14,8 +14,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 
 public class ScheduleListAdapter extends ListAdapter<Schedule, ScheduleViewHolder> {
+    private List<Schedule> schedules = new ArrayList<>();
+
     Context context;
     public ScheduleListAdapter(@NonNull DiffUtil.ItemCallback<Schedule> diffCallback, Context ct){
         super(diffCallback);
@@ -31,13 +34,14 @@ public class ScheduleListAdapter extends ListAdapter<Schedule, ScheduleViewHolde
     @Override
     public void onBindViewHolder(ScheduleViewHolder holder, int position) {
         Schedule current = getItem(position);
-        holder.bind(current.getScheduleName(), current.getScheduleDate(), current.getScheduleDetail());
+        holder.bind(current.getScheduleName(), current.getScheduleDate(), current.getScheduleTime(), current.getScheduleDetail());
         holder.mainItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context, DetailActivity.class);
                 intent.putExtra("nameEvent",current.getScheduleName());
                 intent.putExtra("dateEvent",current.getScheduleDate());
+                intent.putExtra("timeEvent",current.getScheduleTime());
                 intent.putExtra("detailEvent",current.getScheduleDetail());
                 context.startActivity(intent);
             }
@@ -56,6 +60,10 @@ public class ScheduleListAdapter extends ListAdapter<Schedule, ScheduleViewHolde
             same = oldItem.getScheduleName().equals(newItem.getScheduleName());
             return same;
         }
+    }
+
+    public Schedule getScheduleAt(int position){
+        return schedules.get(position);
     }
 
 }

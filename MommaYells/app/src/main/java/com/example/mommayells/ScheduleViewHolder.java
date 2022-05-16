@@ -23,7 +23,7 @@ public class ScheduleViewHolder extends RecyclerView.ViewHolder {
 //        DetailEvent = (TextView) itemView.findViewById(R.id.addKeteranganEvent);
         mainItem = itemView.findViewById(R.id.itemMain);
     }
-    public void bind(String nameEvent, String dateEvent,  String detailEvent) {
+    public void bind(String nameEvent, String dateEvent, String timeEvent, String detailEvent) {
         NameEvent.setText(nameEvent);
         DateEvent.setText(dateEvent);
 //        DetailEvent.setText(detailEvent);

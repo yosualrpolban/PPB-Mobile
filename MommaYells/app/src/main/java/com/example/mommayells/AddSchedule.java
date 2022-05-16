@@ -4,8 +4,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -14,6 +16,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TimePicker;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -21,9 +24,9 @@ import java.util.Locale;
 
 public class AddSchedule extends AppCompatActivity {
     private AppCompatButton mImageButton, mButtonCancel;
-    private EditText mAddNameSchedule, mAddDateSchedule, mAddKeteranganSchedule;
+    private EditText mAddNameSchedule, mAddDateSchedule, mAddTimeSchedule, mAddKeteranganSchedule;
     final Calendar calendar = Calendar.getInstance();
-    private ImageView mButtonDate;
+    private ImageView mButtonDate, mButtonTime;
     private boolean isFragmentDisplayed = false;
     static final String STATE_FRAGMENT = "state_of_fragment";
 
@@ -37,9 +40,11 @@ public class AddSchedule extends AppCompatActivity {
         mAddNameSchedule = (EditText) findViewById(R.id.addNameEvent);
         mAddDateSchedule = (EditText) findViewById(R.id.addDateEvent);
         mAddKeteranganSchedule = (EditText) findViewById(R.id.addKeteranganEvent);
+        mAddTimeSchedule = (EditText) findViewById(R.id.addTimeEvent);
         mImageButton = (AppCompatButton) findViewById(R.id.ButtonWhats);
         final Button mButtonAdd = (Button) findViewById(R.id.buttonSubmit);
         mButtonDate = (ImageView) findViewById(R.id.buttonDate);
+        mButtonTime = (ImageView) findViewById(R.id.buttonTime);
 
 
         mImageButton.setOnClickListener(new View.OnClickListener() {
@@ -68,7 +73,7 @@ public class AddSchedule extends AppCompatActivity {
                 calendar.set(Calendar.YEAR, year);
                 calendar.set(Calendar.MONTH, month);
                 calendar.set(Calendar.DAY_OF_MONTH, day);
-                updateLabel();
+                updateLabelDate();
             }
         };
         mButtonDate.setOnClickListener(new View.OnClickListener() {
@@ -79,19 +84,42 @@ public class AddSchedule extends AppCompatActivity {
             }
         });
 
+        mButtonTime.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Calendar mcurrentTime = Calendar.getInstance();
+                int hour = mcurrentTime.get(Calendar.HOUR_OF_DAY);
+                int minute = mcurrentTime.get(Calendar.MINUTE);
+                TimePickerDialog mTimePicker;
+                mTimePicker = new TimePickerDialog(AddSchedule.this, new TimePickerDialog.OnTimeSetListener() {
+
+                    @Override
+                    public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
+                        mAddTimeSchedule.setText(selectedHour + ":" + selectedMinute);
+                    }
+                }, hour, minute, true);//Yes 24 hour time
+                mTimePicker.show();
+            }
+        });
+
+
         mButtonAdd.setOnClickListener(view ->{
             Intent replyIntent = new Intent(this,MainActivity.class);
+            String scheduleName = mAddNameSchedule.getText().toString();
+            String scheduleDate = mAddDateSchedule.getText().toString();
+            String scheduleTime = mAddTimeSchedule.getText().toString();
+            String scheduleDetail = mAddKeteranganSchedule.getText().toString();
             if(TextUtils.isEmpty(mAddNameSchedule.getText())){
                 setResult(RESULT_CANCELED, replyIntent);
             }else{
-                String scheduleName = mAddNameSchedule.getText().toString();
-                String scheduleDate = mAddDateSchedule.getText().toString();
-                String scheduleDetail = mAddKeteranganSchedule.getText().toString();
-                Schedule schedule = new Schedule(scheduleName,scheduleDate,scheduleDetail);
+                Schedule schedule = new Schedule(scheduleName,scheduleDate,scheduleTime,scheduleDetail);
+                ScheduleViewModel scheduleViewModel = new ViewModelProvider(AddSchedule.this).get(ScheduleViewModel.class);
                 replyIntent.putExtra("scheduleName",scheduleName);
                 replyIntent.putExtra("scheduleDate",scheduleDate);
+                replyIntent.putExtra("scheduleTime",scheduleTime);
                 replyIntent.putExtra("scheduleDetail",scheduleDetail);
                 setResult(RESULT_OK,replyIntent);
+                scheduleViewModel.insert(schedule);
             }
             finish();
         });
@@ -134,10 +162,16 @@ public class AddSchedule extends AppCompatActivity {
         super.onSaveInstanceState(savedInstanceState);
     }
 
-    private void updateLabel() {
+    private void updateLabelDate() {
         String myFormat = "MM/dd/yy"; //In which you need put here
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
         mAddDateSchedule.setText(sdf.format(calendar.getTime()));
     }
+
+//    private void updateLabelTime() {
+//        String myFormat = "hh:mm:ss"; //In which you need put here
+//        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+//        mAddTimeSchedule.setText(sdf.format(calendar.getTime()));
+//    }
 }
 

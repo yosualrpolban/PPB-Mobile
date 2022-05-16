@@ -2,6 +2,7 @@ package com.example.mommayells;
 
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
+import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
@@ -12,6 +13,9 @@ import java.util.List;
 public interface ScheduleDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     void insert(Schedule schedule);
+
+    @Query("DELETE FROM schedule_table WHERE nameSchedule = :nameSchedule")
+    void deleteOne(String nameSchedule);
 
     @Query("DELETE FROM schedule_table")
     void deleteAll();

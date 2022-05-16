@@ -21,7 +21,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buttonSubmit"
-        app:layout_constraintVertical_bias="0.511" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <ImageView
         android:id="@+id/Logos"
@@ -109,6 +109,30 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/titleDate" />
 
+
+    <TextView
+        android:id="@+id/titleTime"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginStart="26dp"
+        android:layout_marginTop="15dp"
+        android:text="Time of Event"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/addDateEvent" />
+
+    <EditText
+        android:id="@+id/addTimeEvent"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="27dp"
+        android:layout_marginTop="7dp"
+        android:layout_marginEnd="26dp"
+        android:ems="10"
+        android:hint="Enter The Date of Event"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/titleTime" />
+
     <EditText
         android:id="@+id/addKeteranganEvent"
         android:layout_width="0dp"
@@ -131,7 +155,7 @@
         android:layout_marginTop="14dp"
         android:text="Detail of Event"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/addDateEvent" />
+        app:layout_constraintTop_toBottomOf="@+id/addTimeEvent" />
 
     <TextView
         android:id="@+id/titleNameEvent"
@@ -159,11 +183,27 @@
         android:layout_height="0dp"
         android:layout_marginStart="316dp"
         android:layout_marginEnd="18dp"
-        app:layout_constraintBottom_toTopOf="@+id/addKeteranganEvent"
+        app:layout_constraintBottom_toTopOf="@+id/addTimeEvent"
         app:layout_constraintEnd_toEndOf="@+id/addDateEvent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/addDateEvent"
         app:layout_constraintTop_toBottomOf="@+id/addNameEvent"
+        app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/event_asset" />
+
+    <ImageView
+        android:id="@+id/buttonTime"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginStart="316dp"
+        android:layout_marginEnd="18dp"
+        app:layout_constraintBottom_toTopOf="@+id/addKeteranganEvent"
+        app:layout_constraintEnd_toEndOf="@+id/addTimeEvent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/addTimeEvent"
+        app:layout_constraintTop_toBottomOf="@+id/addDateEvent"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/timepicker" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
